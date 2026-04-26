@@ -1,4 +1,4 @@
-# sampple_ai_agent README
+# project_agent_rules README
 
 このディレクトリは、AI エージェントに対して「設計から実装確認までを段階的に進めさせるためのルールセット」をまとめたものです。  
 `_rules_v1` は初期版、`_rules_v2_current` は現在運用中の改訂版です。
