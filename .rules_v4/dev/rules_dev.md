@@ -53,7 +53,7 @@
   |5|詳細設計書確認|`rules_{dev}_5_detail_confirm.md`|`{filename}_v{n}.{m}_5_detail.json`|
   |6|コード|`rules_{dev}_6_code.md`|`{filename}_v{n}.{m}.{code_ext}`|
   |7|コード確認|`rules_{dev}_7_code_confirm.md`|`{filename}_v{n}.{m}_7_code_confirm.md`|
-  |8|仕様|`rules_{dev}_8_spec.md`|`仕様_v{n}.{m}.md`|
+  |8|仕様|`rules_{dev}_8_spec.md`|`仕様_差分_v{n}.{m}.md`<br>`仕様_全体_v{n}.{m}.md`|
 
 ### 追加ルール
 
