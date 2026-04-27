@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 usage() {
@@ -9,12 +9,13 @@ Usage:
 Examples:
   bash ./pull_rules.sh
 
-The script lists .rules_* directories from the source repository and copies the
-selected directory into the current repository as .rules.
+The script copies the latest .rules_v4 directory from the source repository
+into the current repository as .rules.
 USAGE
 }
 
 DEFAULT_SOURCE_REPO="yuki746289/product_agent_rules"
+DEFAULT_RULE_DIR=".rules_v4"
 
 normalize_repo_url() {
   local repo="$1"
@@ -102,37 +103,14 @@ clone_args+=("$source_url" "$tmp_dir/source")
 echo "Cloning source repository..."
 git "${clone_args[@]}" >/dev/null
 
-mapfile -t rule_dirs < <(
-  find "$tmp_dir/source" -mindepth 1 -maxdepth 1 -type d -name '.rules_*' -printf '%f\n' | sort -V
-)
-
-if [[ "${#rule_dirs[@]}" -eq 0 ]]; then
-  echo "Error: no .rules_* directories were found in the source repository." >&2
-  exit 1
-fi
-
-echo
-echo "pullするルールを選択して下さい。"
-for index in "${!rule_dirs[@]}"; do
-  printf '  %d. %s\n' "$((index + 1))" "${rule_dirs[$index]}"
-done
-
-echo
-read -r -p "Select directory number: " selection
-
-if ! [[ "$selection" =~ ^[0-9]+$ ]]; then
-  echo "Error: selection must be a number." >&2
-  exit 1
-fi
-
-selected_index="$((selection - 1))"
-if (( selected_index < 0 || selected_index >= ${#rule_dirs[@]} )); then
-  echo "Error: selection is out of range." >&2
-  exit 1
-fi
-
-selected_dir="${rule_dirs[$selected_index]}"
+selected_dir="$DEFAULT_RULE_DIR"
 source_path="$tmp_dir/source/$selected_dir"
+
+if [[ ! -d "$source_path" ]]; then
+  echo "Error: '$selected_dir' was not found in the source repository." >&2
+  exit 1
+fi
+
 destination_path="$repo_root/.rules"
 
 if [[ -e "$destination_path" ]]; then
