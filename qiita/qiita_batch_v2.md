@@ -122,7 +122,7 @@ GitHubは[こちら](https://github.com/yuki746289/product_agent_rules)です。
   があります。
   最初に、どの設計書を使用するかを確認して下さい。
   以降、その設計書を使用して設計を進めます。
-  ルールファイルは、`.rules_v4/dev/{dev}/`フォルダにあります。
+  ルールファイルは、`.rules_v5/dev/{dev}/`フォルダにあります。
 
   |手順|種類|ルールファイル|出力ファイル名|
   |---|---|---|----|
@@ -636,4 +636,3 @@ rg -n "^## " 仕様_全体_v{n}.{m}.md
 ## 参考
 
 github : [https://github.com/yuki746289/product_agent_rules](https://github.com/yuki746289/product_agent_rules)
-
